@@ -28,10 +28,6 @@ LinkedList.prototype.toString = function () {
 };
 
 // Hàm để đảo ngược chuỗi sử dụng danh sách liên kết
-export function reverseStringLinkedList(str) {
-  const list = new LinkedList();
-  for (let i = 0; i < str.length; i++) {
-    list.push(str[i]);
-  }
-  return list.toString();
+export function reverseToBinaryLinkedList(input) {
+  // return output;
 }

@@ -1,7 +1,7 @@
-import { reverseUsingStack } from "./stack.js";
-import { reverseString } from "./queue.js";
-import { reverseStringLinkedList } from "./linkedList.js";
-import { reverseStringArr } from "./array.js";
+import { reverseToBinaryStack } from "./stack.js";
+import { reverseToBinaryQueue } from "./queue.js";
+import { reverseToBinaryLinkedList } from "./linkedList.js";
+import { reverseToBinaryArr } from "./array.js";
 
 const container = document.querySelector(".container");
 const stackBtn = container.querySelector("#stack-btn");
@@ -15,7 +15,7 @@ const time = document.querySelector("#time");
 stackBtn.addEventListener("click", (e) => {
   const startTime = performance.now();
   if (inputValue.value.trim()) {
-    const result = reverseUsingStack(inputValue.value);
+    const result = reverseToBinaryStack(inputValue.value);
     inputReverse.value = result;
   }
   const endTime = performance.now();
@@ -39,7 +39,7 @@ queueBtn.addEventListener("click", () => {
   if (inputValue.value.trim() === "") return;
   const startTime = performance.now();
   if (inputValue.value.trim()) {
-    const result = reverseString(inputValue.value);
+    const result = reverseToBinaryQueue(inputValue.value);
     inputReverse.value = result;
   }
   const endTime = performance.now();
@@ -63,7 +63,7 @@ linkedListBtn.addEventListener("click", () => {
   if (inputValue.value.trim() === "") return;
   const startTime = performance.now();
   if (inputValue.value.trim()) {
-    const result = reverseStringLinkedList(inputValue.value);
+    const result = reverseToBinaryLinkedList(inputValue.value);
     inputReverse.value = result;
   }
   const endTime = performance.now();
@@ -87,7 +87,7 @@ arrBtn.addEventListener("click", () => {
   if (inputValue.value.trim() === "") return;
   const startTime = performance.now();
   if (inputValue.value.trim()) {
-    const result = reverseStringArr(inputValue.value);
+    const result = reverseToBinaryArr(inputValue.value);
 
     inputReverse.value = result;
   }
