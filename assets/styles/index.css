@@ -79,3 +79,7 @@ body {
     border-radius: 10px;
     padding: 5px 10px;
 }
+
+.notice {
+    color: rgb(207, 41, 41);
+}

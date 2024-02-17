@@ -3,19 +3,20 @@ import { reverseToBinaryQueue } from "./queue.js";
 import { reverseToBinaryLinkedList } from "./linkedList.js";
 import { reverseToBinaryArr } from "./array.js";
 
-const container = document.querySelector(".container");
-const stackBtn = container.querySelector("#stack-btn");
-const queueBtn = container.querySelector("#queue-btn");
-const linkedListBtn = container.querySelector("#linked-list-btn");
-const arrBtn = container.querySelector("#arr-btn");
-const inputValue = container.querySelector("#input-value");
-const inputReverse = container.querySelector("#rev-text");
-const time = document.querySelector("#time");
+const $ = document.querySelector.bind(document);
+const stackBtn = $("#stack-btn");
+const queueBtn = $("#queue-btn");
+const linkedListBtn = $("#linked-list-btn");
+const arrBtn = $("#arr-btn");
+const numberOfBits = $("#limit-value");
+const inputValue = $("#input-value");
+const inputReverse = $("#rev-text");
+const time = $("#time");
 
 stackBtn.addEventListener("click", (e) => {
   const startTime = performance.now();
   if (inputValue.value.trim()) {
-    const result = reverseToBinaryStack(inputValue.value);
+    const result = reverseToBinaryStack(inputValue.value, numberOfBits.value);
     inputReverse.value = result;
   }
   const endTime = performance.now();
@@ -39,7 +40,7 @@ queueBtn.addEventListener("click", () => {
   if (inputValue.value.trim() === "") return;
   const startTime = performance.now();
   if (inputValue.value.trim()) {
-    const result = reverseToBinaryQueue(inputValue.value);
+    const result = reverseToBinaryQueue(inputValue.value, numberOfBits.value);
     inputReverse.value = result;
   }
   const endTime = performance.now();
@@ -63,7 +64,7 @@ linkedListBtn.addEventListener("click", () => {
   if (inputValue.value.trim() === "") return;
   const startTime = performance.now();
   if (inputValue.value.trim()) {
-    const result = reverseToBinaryLinkedList(inputValue.value);
+    const result = reverseToBinaryLinkedList(inputValue.value, numberOfBits.value);
     inputReverse.value = result;
   }
   const endTime = performance.now();
@@ -87,7 +88,7 @@ arrBtn.addEventListener("click", () => {
   if (inputValue.value.trim() === "") return;
   const startTime = performance.now();
   if (inputValue.value.trim()) {
-    const result = reverseToBinaryArr(inputValue.value);
+    const result = reverseToBinaryArr(inputValue.value, numberOfBits.value);
 
     inputReverse.value = result;
   }
