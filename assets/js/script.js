@@ -66,7 +66,7 @@ function linkedList(inputValue, numberOfBits) {
   let timeResponse = (endTime - startTime).toFixed(10) * 1000;
 
   $("#linked-list-result").innerText = result;
-  $("#linkedlist-res").innerText = timeResponse + "ms";
+  $("#linked-list-res").innerText = timeResponse + "ms";
 }
 
 function validate(inputValue, iteration) {
