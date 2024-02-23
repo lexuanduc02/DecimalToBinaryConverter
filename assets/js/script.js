@@ -59,13 +59,23 @@ function array(inputValue, numberOfBits) {
   $("#array-res").innerText = timeResponse + "ms";
 }
 
+function linkedList(inputValue, numberOfBits) {
+  let startTime = performance.now();
+  let result = reverseToBinaryLinkedList(inputValue, numberOfBits);
+  let endTime = performance.now();
+  let timeResponse = (endTime - startTime).toFixed(10) * 1000;
+
+  $("#linked-list-result").innerText = result;
+  $("#linkedlist-res").innerText = timeResponse + "ms";
+}
+
 function validate(inputValue, iteration) {
   var x = inputValue.value;
   var y = iteration.value;
-  if (isNaN(x)) {
+  if (isNaN(x) || x === "") {
     $("#input").style.backgroundColor = "rgb(255, 240, 240)";
     return false; 
-  } else if (isNaN(y)) {
+  } else if (isNaN(y) || y === "") {
     $("#iteration").style.backgroundColor = "rgb(255, 240, 240)";
     return false; 
   }
