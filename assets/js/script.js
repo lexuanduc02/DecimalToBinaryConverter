@@ -9,7 +9,6 @@ const convertBtn = $("#convert-btn");
 const iteration = $("#iteration");
 const input = $("#input");
 
-
 function showToast() {
    return Toastify({
     text: "Reverse completed",
@@ -26,48 +25,15 @@ function showToast() {
   }).showToast();
 }
 
-function stack(inputValue, numberOfBits) {
-  let startTime = performance.now();
+function reverse (name ,context, func) {
+  let start = performance.now();
+  let result = func.call(context);
+  let stop = performance.now();
+  let timeResponse = (stop - start).toFixed(10)*1000;
 
-  let  result = reverseToBinaryStack(inputValue, numberOfBits);
-
-  let endTime = performance.now();
-
-  let timeResponse = (endTime - startTime).toFixed(10)*1000;
-  
-  $("#stack-result").innerText = result;
-  $("#stack-res").innerText = timeResponse + "ms";
-}
-
-function queue(inputValue, numberOfBits) {
-  let startTime = performance.now();      
-  let result = reverseToBinaryQueue(inputValue, numberOfBits);
-  let endTime = performance.now();
-  let timeResponse = (endTime - startTime).toFixed(10)*1000;
-  
-  $("#queue-result").innerText = result;
-  $("#queue-res").innerText = timeResponse + "ms";
-}
-
-function array(inputValue, numberOfBits) {
-  let startTime = performance.now();
-  let result = reverseToBinaryArr(inputValue, numberOfBits);
-  let endTime = performance.now();
-  let timeResponse = (endTime - startTime).toFixed(10)*1000;
-  
-  $("#array-result").innerText = result;
-  $("#array-res").innerText = timeResponse + "ms";
-}
-
-function linkedList(inputValue, numberOfBits) {
-  let startTime = performance.now();
-  let result = reverseToBinaryLinkedList(inputValue, numberOfBits);
-  let endTime = performance.now();
-  let timeResponse = (endTime - startTime).toFixed(10) * 1000;
-
-  $("#linked-list-result").innerText = result;
-  $("#linked-list-res").innerText = timeResponse + "ms";
-}
+  $(`#${name}-result`).innerText = result;
+  $(`#${name}-res`).innerText = timeResponse + "ms";
+};
 
 function validate(inputValue, iteration) {
   var x = inputValue.value;
@@ -102,11 +68,12 @@ convertBtn.addEventListener("click", (e) => {
     if (iterationValue > 23 || iteration < 0) {
       iterationValue = 23;
     }
-    
-    stack(inputValue, iterationValue);
-    queue(inputValue, iterationValue);
-    array(inputValue, iterationValue);
-    linkedList(inputValue, iterationValue);
+
+    reverse("stack",this, () => reverseToBinaryStack(inputValue, iterationValue));
+    reverse("queue",this, () => reverseToBinaryQueue(inputValue, iterationValue));
+    reverse("array",this, () => reverseToBinaryArr(inputValue, iterationValue));
+    reverse("linked-list",this, () => reverseToBinaryLinkedList(inputValue, iterationValue));
+
     showToast();
   }
 });
