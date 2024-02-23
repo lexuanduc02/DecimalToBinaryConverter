@@ -113,6 +113,9 @@ function integerPart(input) {
 function decimalPart(input, numberOfBits) {
   const queue = new Queue();
   let decimalPart = input - Math.trunc(input);
+
+  if(decimalPart === 0) return "0";
+  
   let count = 0;
 
   while (decimalPart > 0 && count < numberOfBits) {
