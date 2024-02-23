@@ -96,7 +96,7 @@ convertBtn.addEventListener("click", (e) => {
     stack(inputValue, iterationValue);
     queue(inputValue, iterationValue);
     array(inputValue, iterationValue);
-
+    linkedList(inputValue, iterationValue);
     showToast();
   }
 });
