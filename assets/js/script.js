@@ -48,6 +48,15 @@ function queue(inputValue, numberOfBits) {
   $("#queue-result").innerText = result;
   $("#queue-res").innerText = timeResponse + "ms";
 }
+function linkedList(inputValue, numberOfBits) {
+  let startTime = performance.now();
+  let result = reverseToBinaryLinkedList(inputValue, numberOfBits);
+  let endTime = performance.now();
+  let timeResponse = (endTime - startTime).toFixed(10) * 1000;
+
+  $("#linked-list-result").innerText = result;
+  $("#linkedlist-res").innerText = timeResponse + "ms";
+}
 
 function array(inputValue, numberOfBits) {
   let startTime = performance.now();
@@ -78,6 +87,7 @@ convertBtn.addEventListener("click", (e) => {
   stack(inputValue, iterationValue);
   queue(inputValue, iterationValue);
   array(inputValue, iterationValue);
+  linkedList(inputValue, iterationValue);
 
   showToast();
 });
