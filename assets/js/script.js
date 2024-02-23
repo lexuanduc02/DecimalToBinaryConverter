@@ -4,24 +4,14 @@ import { reverseToBinaryLinkedList } from "./linkedList.js";
 import { reverseToBinaryArr } from "./array.js";
 
 const $ = document.querySelector.bind(document);
-const stackBtn = $("#stack-btn");
-const queueBtn = $("#queue-btn");
-const linkedListBtn = $("#linked-list-btn");
-const arrBtn = $("#arr-btn");
-const numberOfBits = $("#limit-value");
-const inputValue = $("#input-value");
-const inputReverse = $("#rev-text");
-const time = $("#time");
+const resetBtn = $("#reset-btn");
+const convertBtn = $("#convert-btn");
+const iteration = $("#iteration");
+const input = $("#input");
 
-stackBtn.addEventListener("click", (e) => {
-  const startTime = performance.now();
-  if (inputValue.value.trim()) {
-    const result = reverseToBinaryStack(inputValue.value, numberOfBits.value);
-    inputReverse.value = result;
-  }
-  const endTime = performance.now();
-  time.innerText = `Thời gian thực hiện: ${(endTime - startTime).toFixed(3)}s`;
-  Toastify({
+
+function showToast() {
+   return Toastify({
     text: "Reverse completed",
     duration: 3000,
     destination: "https://github.com/apvarun/toastify-js",
@@ -34,77 +24,60 @@ stackBtn.addEventListener("click", (e) => {
       background: "rgb(7, 205, 7)",
     },
   }).showToast();
+}
+
+function stack(inputValue, numberOfBits) {
+  let startTime = performance.now();
+
+  let  result = reverseToBinaryStack(inputValue, numberOfBits);
+
+  let endTime = performance.now();
+
+  let timeResponse = (endTime - startTime).toFixed(10)*1000;
+  
+  $("#stack-result").innerText = result;
+  $("#stack-res").innerText = timeResponse + "ms";
+}
+
+function queue(inputValue, numberOfBits) {
+  let startTime = performance.now();      
+  let result = reverseToBinaryQueue(inputValue, numberOfBits);
+  let endTime = performance.now();
+  let timeResponse = (endTime - startTime).toFixed(10)*1000;
+  
+  $("#queue-result").innerText = result;
+  $("#queue-res").innerText = timeResponse + "ms";
+}
+
+function array(inputValue, numberOfBits) {
+  let startTime = performance.now();
+  let result = reverseToBinaryArr(inputValue, numberOfBits);
+  let endTime = performance.now();
+  let timeResponse = (endTime - startTime).toFixed(10)*1000;
+  
+  $("#array-result").innerText = result;
+  $("#array-res").innerText = timeResponse + "ms";
+}
+
+resetBtn.addEventListener("click", (e) => {
+  $("#input").value = "";
+  $("#iteration").value = "";
+  $("#result").style.display = "none";
 });
 
-queueBtn.addEventListener("click", () => {
-  if (inputValue.value.trim() === "") return;
-  const startTime = performance.now();
-  if (inputValue.value.trim()) {
-    const result = reverseToBinaryQueue(inputValue.value, numberOfBits.value);
-    inputReverse.value = result;
-  }
-  const endTime = performance.now();
-  time.innerText = `Thời gian thực hiện: ${(endTime - startTime).toFixed(3)}s`;
-  Toastify({
-    text: "Reverse completed",
-    duration: 3000,
-    destination: "https://github.com/apvarun/toastify-js",
-    newWindow: true,
-    close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "right", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
-    style: {
-      background: "rgb(7, 205, 7)",
-    },
-  }).showToast();
-});
+convertBtn.addEventListener("click", (e) => {
+  $("#result").style.display = "block";
+  
+  let inputValue = parseFloat($("#input").value);
+  let iterationValue = parseInt($("#iteration").value);
 
-linkedListBtn.addEventListener("click", () => {
-  if (inputValue.value.trim() === "") return;
-  const startTime = performance.now();
-  if (inputValue.value.trim()) {
-    const result = reverseToBinaryLinkedList(inputValue.value, numberOfBits.value);
-    inputReverse.value = result;
+  if (iterationValue > 23 || iteration < 0) {
+    iterationValue = 23;
   }
-  const endTime = performance.now();
-  time.innerText = `Thời gian thực hiện: ${(endTime - startTime).toFixed(3)}s`;
-  Toastify({
-    text: "Reverse completed",
-    duration: 3000,
-    destination: "https://github.com/apvarun/toastify-js",
-    newWindow: true,
-    close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "right", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
-    style: {
-      background: "rgb(7, 205, 7)",
-    },
-  }).showToast();
-});
+  
+  stack(inputValue, iterationValue);
+  queue(inputValue, iterationValue);
+  array(inputValue, iterationValue);
 
-arrBtn.addEventListener("click", () => {
-  if (inputValue.value.trim() === "") return;
-  const startTime = performance.now();
-  if (inputValue.value.trim()) {
-    const result = reverseToBinaryArr(inputValue.value, numberOfBits.value);
-
-    inputReverse.value = result;
-  }
-  const endTime = performance.now();
-  time.innerText = `Thời gian thực hiện: ${(endTime - startTime).toFixed(3)}s`;
-  Toastify({
-    text: "Reverse completed",
-    duration: 3000,
-    destination: "https://github.com/apvarun/toastify-js",
-    newWindow: true,
-    close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "right", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
-    style: {
-      background: "rgb(7, 205, 7)",
-    },
-  }).showToast();
+  showToast();
 });

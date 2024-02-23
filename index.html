@@ -2,58 +2,421 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home</title>
-  <link rel="stylesheet" href="../assets/styles/index.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Decimal number to binary conversion calculator and how to convert.">
+
+  <link rel="stylesheet" type="text/css" href="/lib/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <title>Decimal to Binary Converter</title>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+
+  <style>
+    h1 {
+      font-size: 1.6rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    h4 {
+      font-size: 1.2rem;
+    }
+
+    #wrapper td {
+      padding: .75rem;
+    }
+
+    #calcform {
+      max-width: 500px;
+      padding: 20px;
+      background: #f0eedc;
+      border: 1px solid #e0e0e0;
+      border-radius: 7px;
+    }
+
+    #calcform button img {
+      filter: invert(100%);
+    }
+
+    .btn span {
+      font-weight: bold;
+      font-size: large;
+    }
+
+    #calcform .input-group sub {
+      font-size: large;
+    }
+
+    #caldiv {
+      display: none;
+    }
+
+    #cal2tbl {
+      max-height: 400px;
+    }
+
+    #cal2tbl th {
+      font-weight: normal;
+    }
+
+    #cal2tbl td {
+      line-height: 1;
+      /*background:#fff;*/
+    }
+
+    #cal2tbl th p {
+      word-break: break-all;
+    }
+
+    #cal2tbl p {
+      line-height: 1;
+    }
+
+    #cal2tbl tbody tr td:nth-child(3) {
+      background: #f8f8f8;
+      border: dashed 1px #333;
+    }
+
+    #cal {
+      background: #e9ecef;
+      height: auto;
+    }
+
+    .ntable thead {
+      position: sticky;
+      top: 0;
+      background: #f0f0f0;
+    }
+
+    .ntable tr td:nth-child(3) {
+      background: #fff0f0;
+    }
+
+    .dtable td {
+      text-align: right;
+      line-height: 0.5 !important;
+    }
+
+    #result {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="container">
-    <h1 class="text-center my-md text-uppercase">Decimal to Binary converter</h1>
-    <div class="flex all-center column">
-      <div class="flex all-center gap-md">
-        <button id="stack-btn" type="button" class="btn btn-primary">
-          Stack
-        </button>
-        <button id="queue-btn" type="button" class="btn btn-primary">
-          Queue
-        </button>
-        <button id="linked-list-btn" type="button" class="btn btn-primary">
-          Linked List
-        </button>
-        <button id="arr-btn" type="button" class="btn btn-primary">
-          Array
-        </button>
-      </div>
-
-      <div id="time" class="my-md">Time run: ?</div>
-      <div id="content" class="flex items-center my-md gap-md">
-        <div class="flex column items-center gap-md">
-          <label for="">Number of bits <span class="notice">(*)</span></label>
-          <input type="text" id="limit-value" class="textarea-custom p-md" spellcheck="false"
-            placeholder="Type your text here..."></input>
-        </div>
-        <div class="flex column items-center gap-md">
-          <label for="">INPUT</label>
-          <input type="text" id="input-value" class="textarea-custom p-md" spellcheck="false"
-            placeholder="Type your text here..."></input>
-        </div>
-        <div class="flex column items-center gap-md">
-          <label for="">OUTPUT</label>
-          <input type="text" id="rev-text" class="textarea-custom p-md" placeholder="Result..."></input>
-        </div>
+  <div id="wrapper">
+    <div id="div-gpt-ad-1639638001114-0">
+    </div>
+    <div id="lcol">
+      <div id="doc">
+        <h1>Decimal to Binary converter</h1>
+        <noscript>
+          <div class="alert alert-warning">Please <a href="https://www.enable-javascript.com/" rel="nofollow">enable
+              Javascript in your browser's settings</a> to allow calculator to work!</div>
+        </noscript>
+        <form id="calcform" name="calcform" autocomplete="off">
+          <div class="form-group">
+            <label for="input">Enter decimal number</label>
+            <div class="input-group">
+              <input type="text" id="input" name="x" class="form-control form-control-lg" required="" autofocus="">
+              <div class="input-group-append">
+                <span class="input-group-text"><sub>10</sub></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="iteration">
+              Enter the maximum number of bits of the decimal part</label>
+            <div class="input-group">
+              <input type="text" id="iteration" name="x" class="form-control form-control-lg" required="" autofocus="">
+              <div class="input-group-append">
+                <span class="input-group-text"><sub>10</sub></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="button" title="Convert" id="convert-btn" class="btn btn-success"><span>=</span>
+              Convert</button>
+            <button type="reset" title="Reset" class="btn btn-secondary" id="reset-btn"><span>×</span>
+              Reset</button>
+          </div>
+          <div class="form-group" id="result">
+            <h2 class="label result-heading">Results</h2>
+            <label for="stack-result" class="ylabel">Stack - Response Time: <span id="stack-res"></span></label>
+            <div class="input-group">
+              <textarea rows="2" id="stack-result" class="form-control form-control-lg" readonly=""></textarea>
+              <div class="input-group-append">
+                <span class="input-group-text"><sub>2</sub></span>
+              </div>
+            </div>
+            <label for="queue-result" class="ylabel">Queue - Response Time: <span id="queue-res"></span></label>
+            <div class="input-group">
+              <textarea rows="2" id="queue-result" class="form-control form-control-lg" readonly=""></textarea>
+              <div class="input-group-append">
+                <span class="input-group-text"><sub>2</sub></span>
+              </div>
+            </div>
+            <label for="linked-list-result" class="ylabel">Linked List - Response Time: <span
+                id="linked-list-res"></span></label>
+            <div class="input-group">
+              <textarea rows="2" id="linked-list-result" class="form-control form-control-lg" readonly=""></textarea>
+              <div class="input-group-append">
+                <span class="input-group-text"><sub>2</sub></span>
+              </div>
+            </div>
+            <label for="array-result" class="ylabel">Array - Response Time: <span id="array-res"></span></label>
+            <div class="input-group">
+              <textarea rows="2" id="array-result" class="form-control form-control-lg" readonly=""></textarea>
+              <div class="input-group-append">
+                <span class="input-group-text"><sub>2</sub></span>
+              </div>
+            </div>
+          </div>
+          <div id="caldiv" class="form-group">
+            <p>Decimal to binary calculation steps</p>
+            <div id="cal" class="form-control">
+              <p id="cal2dec"></p>
+              <p>Divide by the base 2 to get the digits from the remainders:</p>
+              <table id="cal2tbl" class="table table-responsive">
+                <thead>
+                  <tr>
+                    <th>Division<br>by 2</th>
+                    <th>Quotient</th>
+                    <th>
+                      <p>Remainder</p>(Digit)
+                    </th>
+                    <th>Bit #</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+              <p id="cal2result1" class="table-responsive"></p>
+              <p id="cal2result2" class="table-responsive"></p>
+            </div>
+          </div>
+        </form>
+        <div id="adngin-bottom_01-0"></div>
+        <h2>Decimal to binary conversion table</h2>
+        <table class="dtable">
+          <thead>
+            <tr>
+              <th>Decimal<br>Number</th>
+              <th>Binary<br>Number</th>
+              <th>Hex<br>Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>10</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>11</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>100</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>101</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>110</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>111</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>1000</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>1001</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>1010</td>
+              <td>A</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>1011</td>
+              <td>B</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>1100</td>
+              <td>C</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>1101</td>
+              <td>D</td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>1110</td>
+              <td>E</td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td>1111</td>
+              <td>F</td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td>10000</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td>10001</td>
+              <td>11</td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td>10010</td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td>19</td>
+              <td>10011</td>
+              <td>13</td>
+            </tr>
+            <tr>
+              <td>20</td>
+              <td>10100</td>
+              <td>14</td>
+            </tr>
+            <tr>
+              <td>21</td>
+              <td>10101</td>
+              <td>15</td>
+            </tr>
+            <tr>
+              <td>22</td>
+              <td>10110</td>
+              <td>16</td>
+            </tr>
+            <tr>
+              <td>23</td>
+              <td>10111</td>
+              <td>17</td>
+            </tr>
+            <tr>
+              <td>24</td>
+              <td>11000</td>
+              <td>18</td>
+            </tr>
+            <tr>
+              <td>25</td>
+              <td>11001</td>
+              <td>19</td>
+            </tr>
+            <tr>
+              <td>26</td>
+              <td>11010</td>
+              <td>1A</td>
+            </tr>
+            <tr>
+              <td>27</td>
+              <td>11011</td>
+              <td>1B</td>
+            </tr>
+            <tr>
+              <td>28</td>
+              <td>11100</td>
+              <td>1C</td>
+            </tr>
+            <tr>
+              <td>29</td>
+              <td>11101</td>
+              <td>1D</td>
+            </tr>
+            <tr>
+              <td>30</td>
+              <td>11110</td>
+              <td>1E</td>
+            </tr>
+            <tr>
+              <td>31</td>
+              <td>11111</td>
+              <td>1F</td>
+            </tr>
+            <tr>
+              <td>32</td>
+              <td>100000</td>
+              <td>20</td>
+            </tr>
+            <tr>
+              <td>64</td>
+              <td>1000000</td>
+              <td>40</td>
+            </tr>
+            <tr>
+              <td>128</td>
+              <td>10000000</td>
+              <td>80</td>
+            </tr>
+            <tr>
+              <td>256</td>
+              <td>100000000</td>
+              <td>100</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>&nbsp;</p>
+        <hr>
       </div>
     </div>
+    <div id="rcol">
+      <h5>NUMBER CONVERSION</h5>
+      <ul>
+        <li><a
+            href="mailto:?subject=RapidTables%20website&amp;body=Please%20checkout%20this%20site:%20https://www.rapidtables.com">Recommend
+            Site</a></li>
+        <li><a href="#feedback">Send Feedback</a></li>
+        <li><a href="/about/about.html">About</a></li>
+      </ul>
+    </div>
   </div>
-
-  <!-- Script file -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"
-    integrity="sha512-sG5Q7boJL+ft/weuz6Mmi9XBD+bEzE9AI2FMP4YMFxp3FpTFUQSQQm5K5cSgJCyed6bWs3W8f8h0lp36lHXhQA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  <script type="module" src="../assets/js/script.js"></script>
+  <div id="footer">
+    <p>©
+      <a href="http://www.fithou.edu.vn/">fithou.edu.vn</a>
+    </p>
+  </div>
+  <div id="adngin-adhesive-0"></div>
 </body>
+
+<script type="module" src="./assets/js/script.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 </html>

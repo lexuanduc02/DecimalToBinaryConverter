@@ -38,7 +38,51 @@ class Stack {
   }
 }
 
-// Function to reverse the string
-export function reverseToBinaryStack(inout) {
-  // return output;
+function convertIntegerToBinary(integerPart) {
+  let binaryResult = "";
+
+  if (integerPart === 0) {
+    binaryResult = "0.";
+  } else {
+    let stack = new Stack(Math.ceil(Math.log2(integerPart)) + 1);
+
+    while (integerPart > 0) {
+      let bit = integerPart % 2;
+      stack.push(bit);
+      integerPart = Math.floor(integerPart / 2);
+    }
+
+    while (!stack.isEmpty()) {
+      binaryResult += stack.pop().toString();
+    }
+
+    binaryResult += ".";
+  }
+
+  return binaryResult;
+}
+
+function convertDecimalToBinary(decimalPart, iterations) {
+  let binaryResult = "";
+
+
+  for (let i = 0; i < iterations; ++i) {
+    decimalPart *= 2;
+    let bit = Math.floor(decimalPart);
+    binaryResult += bit.toString();
+    decimalPart -= bit;
+  }
+
+
+  return binaryResult;
+}
+
+export function reverseToBinaryStack(number, iterations) {
+  let integerPart = Math.floor(number);
+  let decimalPart = number - integerPart;
+
+  let integerBinary = convertIntegerToBinary(integerPart);
+  let decimalBinary = convertDecimalToBinary(decimalPart, iterations);
+
+  return integerBinary + decimalBinary;
 }
