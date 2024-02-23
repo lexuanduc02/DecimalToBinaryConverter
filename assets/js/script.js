@@ -59,6 +59,19 @@ function array(inputValue, numberOfBits) {
   $("#array-res").innerText = timeResponse + "ms";
 }
 
+function validate(inputValue, iteration) {
+  var x = inputValue.value;
+  var y = iteration.value;
+  if (isNaN(x)) {
+    $("#input").style.backgroundColor = "rgb(255, 240, 240)";
+    return false; 
+  } else if (isNaN(y)) {
+    $("#iteration").style.backgroundColor = "rgb(255, 240, 240)";
+    return false; 
+  }
+  return true;
+} 
+
 resetBtn.addEventListener("click", (e) => {
   $("#input").value = "";
   $("#iteration").value = "";
@@ -66,18 +79,24 @@ resetBtn.addEventListener("click", (e) => {
 });
 
 convertBtn.addEventListener("click", (e) => {
-  $("#result").style.display = "block";
+  if(validate(input, iteration) == false) 
+    return;
+  else {
+    $("#result").style.display = "block";
+    $("#input").style.backgroundColor = "#fff";
+    $("#iteration").style.backgroundColor = "#fff";
   
-  let inputValue = parseFloat($("#input").value);
-  let iterationValue = parseInt($("#iteration").value);
+    let inputValue = parseFloat($("#input").value);
+    let iterationValue = parseInt($("#iteration").value);
 
-  if (iterationValue > 23 || iteration < 0) {
-    iterationValue = 23;
+    if (iterationValue > 23 || iteration < 0) {
+      iterationValue = 23;
+    }
+    
+    stack(inputValue, iterationValue);
+    queue(inputValue, iterationValue);
+    array(inputValue, iterationValue);
+
+    showToast();
   }
-  
-  stack(inputValue, iterationValue);
-  queue(inputValue, iterationValue);
-  array(inputValue, iterationValue);
-
-  showToast();
 });
