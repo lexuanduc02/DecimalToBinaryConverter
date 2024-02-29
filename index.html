@@ -104,6 +104,10 @@
     #result {
       display: none;
     }
+
+    #conversion-step {
+      display: none;
+    }
   </style>
 </head>
 
@@ -201,199 +205,35 @@
           </div>
         </form>
         <div id="adngin-bottom_01-0"></div>
-        <h2>Decimal to binary conversion table</h2>
-        <table class="dtable">
-          <thead>
-            <tr>
-              <th>Decimal<br>Number</th>
-              <th>Binary<br>Number</th>
-              <th>Hex<br>Number</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>10</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>11</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>100</td>
-              <td>4</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>101</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td>110</td>
-              <td>6</td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td>111</td>
-              <td>7</td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td>1000</td>
-              <td>8</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>1001</td>
-              <td>9</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>1010</td>
-              <td>A</td>
-            </tr>
-            <tr>
-              <td>11</td>
-              <td>1011</td>
-              <td>B</td>
-            </tr>
-            <tr>
-              <td>12</td>
-              <td>1100</td>
-              <td>C</td>
-            </tr>
-            <tr>
-              <td>13</td>
-              <td>1101</td>
-              <td>D</td>
-            </tr>
-            <tr>
-              <td>14</td>
-              <td>1110</td>
-              <td>E</td>
-            </tr>
-            <tr>
-              <td>15</td>
-              <td>1111</td>
-              <td>F</td>
-            </tr>
-            <tr>
-              <td>16</td>
-              <td>10000</td>
-              <td>10</td>
-            </tr>
-            <tr>
-              <td>17</td>
-              <td>10001</td>
-              <td>11</td>
-            </tr>
-            <tr>
-              <td>18</td>
-              <td>10010</td>
-              <td>12</td>
-            </tr>
-            <tr>
-              <td>19</td>
-              <td>10011</td>
-              <td>13</td>
-            </tr>
-            <tr>
-              <td>20</td>
-              <td>10100</td>
-              <td>14</td>
-            </tr>
-            <tr>
-              <td>21</td>
-              <td>10101</td>
-              <td>15</td>
-            </tr>
-            <tr>
-              <td>22</td>
-              <td>10110</td>
-              <td>16</td>
-            </tr>
-            <tr>
-              <td>23</td>
-              <td>10111</td>
-              <td>17</td>
-            </tr>
-            <tr>
-              <td>24</td>
-              <td>11000</td>
-              <td>18</td>
-            </tr>
-            <tr>
-              <td>25</td>
-              <td>11001</td>
-              <td>19</td>
-            </tr>
-            <tr>
-              <td>26</td>
-              <td>11010</td>
-              <td>1A</td>
-            </tr>
-            <tr>
-              <td>27</td>
-              <td>11011</td>
-              <td>1B</td>
-            </tr>
-            <tr>
-              <td>28</td>
-              <td>11100</td>
-              <td>1C</td>
-            </tr>
-            <tr>
-              <td>29</td>
-              <td>11101</td>
-              <td>1D</td>
-            </tr>
-            <tr>
-              <td>30</td>
-              <td>11110</td>
-              <td>1E</td>
-            </tr>
-            <tr>
-              <td>31</td>
-              <td>11111</td>
-              <td>1F</td>
-            </tr>
-            <tr>
-              <td>32</td>
-              <td>100000</td>
-              <td>20</td>
-            </tr>
-            <tr>
-              <td>64</td>
-              <td>1000000</td>
-              <td>40</td>
-            </tr>
-            <tr>
-              <td>128</td>
-              <td>10000000</td>
-              <td>80</td>
-            </tr>
-            <tr>
-              <td>256</td>
-              <td>100000000</td>
-              <td>100</td>
-            </tr>
-          </tbody>
-        </table>
-        <p>&nbsp;</p>
+        <div id="conversion-step">
+          <h2>How to Convert</h2>
+          <h4>Conversion steps</h4>
+          <p> (*) Convert integer path</p>
+          <ol>
+            <li>Divide the number by 2.</li>
+            <li>Get the integer quotient for the next iteration.</li>
+            <li>Get the remainder for the binary digit.</li>
+            <li>Repeat the steps until the quotient is equal to 0.</li>
+          </ol>
+          <table class="ntable">
+            <tbody id="integer-table-body">
+            </tbody>
+          </table>
+          <!-- <p id="integer-result"> = (10101110)<sub>2</sub></p> -->
+          <p> (*) Convert remainder path</p>
+          <ol>
+            <li>Multiply the number by 2.</li>
+            <li>Get the remainder quotient for the next iteration.</li>
+            <li>Get the integer for the binary digit.</li>
+            <li>Repeat the steps until the quotient is equal to 0.</li>
+          </ol>
+          <table class="ntable">
+            <tbody id="remainder-table-body">
+            </tbody>
+          </table>
+          <!-- <p id="remainder-result"> = (10101110)<sub>2</sub></p> -->
+          <p>&nbsp;</p>
+        </div>
         <hr>
       </div>
     </div>

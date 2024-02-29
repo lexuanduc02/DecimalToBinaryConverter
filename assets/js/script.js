@@ -9,6 +9,74 @@ const convertBtn = $("#convert-btn");
 const iteration = $("#iteration");
 const input = $("#input");
 
+function generateConvertIntegerSteps(value) {
+  const tableBody = $("#integer-table-body");
+  tableBody.innerHTML = `<tr>
+                          <th>Division<br>by 2</th>
+                          <th>Quotient</th>
+                          <th>Remainder</th>
+                          <th>Bit #</th>
+                        </tr>`
+
+  let quotient = Math.trunc(value);
+  let bitNumber = 0;
+
+  while (quotient > 0) {
+      const remainder = quotient % 2;
+
+      let nextQuotient = Math.floor(quotient / 2);
+      const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>(${quotient})/2</td>
+            <td>${nextQuotient}</td>
+            <td>${remainder}</td>
+            <td>${bitNumber}</td>
+        `;
+        
+        tableBody.appendChild(row);
+        
+        quotient = nextQuotient;
+        bitNumber++;
+  }
+}
+
+function generateConvertRemainderSteps(value, iteration) {
+  const tableBody = $("#remainder-table-body");
+  tableBody.innerHTML = `<tr>
+                          <th>Multiply<br>by 2</th>
+                          <th>Quotient</th>
+                          <th>Integer</th>
+                          <th>Bit #</th>
+                        </tr>`
+
+  let quotient = (value - Math.floor(value)).toFixed(2);
+  let bitNumber = 0;
+
+  while (bitNumber < iteration) {
+      const remainder = Math.floor(quotient * 2);
+      let nextQuotient = ((quotient * 2) - Math.floor(quotient * 2)).toFixed(2);
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+          <td>(${quotient})*2</td>
+          <td>${nextQuotient}</td>
+          <td>${remainder}</td>
+          <td>${bitNumber}</td>
+      `;
+
+      tableBody.appendChild(row);
+
+      quotient = nextQuotient;
+
+      if (quotient == 0) {
+          console.log("Quotient is zero. Exiting loop.");
+          break; // Exit the loop if the quotient is zero
+      }
+
+      bitNumber++;
+  }
+}
+
 function showToast() {
    return Toastify({
     text: "Reverse completed",
@@ -52,6 +120,7 @@ resetBtn.addEventListener("click", (e) => {
   $("#input").value = "";
   $("#iteration").value = "";
   $("#result").style.display = "none";
+  $("#conversion-step").style.display = "none";
 });
 
 convertBtn.addEventListener("click", (e) => {
@@ -61,6 +130,7 @@ convertBtn.addEventListener("click", (e) => {
     $("#result").style.display = "block";
     $("#input").style.backgroundColor = "#fff";
     $("#iteration").style.backgroundColor = "#fff";
+    $("#conversion-step").style.display = "block";
   
     let inputValue = parseFloat($("#input").value);
     let iterationValue = parseInt($("#iteration").value);
@@ -74,6 +144,8 @@ convertBtn.addEventListener("click", (e) => {
     reverse("array",this, () => reverseToBinaryArr(inputValue, iterationValue));
     reverse("linked-list",this, () => reverseToBinaryLinkedList(inputValue, iterationValue));
 
+    generateConvertIntegerSteps(inputValue);
+    generateConvertRemainderSteps(inputValue, iterationValue);
     showToast();
   }
 });
