@@ -101,6 +101,8 @@ function reverse (name ,context, func) {
 
   $(`#${name}-result`).innerText = result;
   $(`#${name}-res`).innerText = timeResponse + "ms";
+
+  return result;
 };
 
 function validate(inputValue, iteration) {
@@ -116,11 +118,50 @@ function validate(inputValue, iteration) {
   return true;
 } 
 
+function setConversionHistory(inputValue, result, iterationValue) {
+  let data = {
+    decimal: inputValue,
+    binary: result,
+    iteration: iterationValue,
+  };
+
+  let history = JSON.parse(localStorage.getItem("history")) || [];
+
+  let found = false;
+  history.forEach((item) => {
+    if (item.decimal === inputValue && item.iteration === iterationValue) {
+      found = true;
+    }
+  });
+
+  if(!found){
+    history.push(data);
+    localStorage.setItem("history", JSON.stringify(history));
+  };
+}
+
+function getConversionHistory(){
+  let history = JSON.parse(localStorage.getItem("history")) || [];
+
+  let tableBody = $("#history-table-body");
+  tableBody.innerHTML = "";
+
+  history.forEach((data) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${data.decimal} (${data.iteration})</td>
+      <td>${data.binary}</td>
+    `;
+
+    tableBody.appendChild(row);
+  });
+
+}
+
 resetBtn.addEventListener("click", (e) => {
   $("#input").value = "";
   $("#iteration").value = "";
   $("#result").style.display = "none";
-  $("#conversion-step").style.display = "none";
 });
 
 convertBtn.addEventListener("click", (e) => {
@@ -139,13 +180,20 @@ convertBtn.addEventListener("click", (e) => {
       iterationValue = 23;
     }
 
+    let result = reverse("queue",this, () => reverseToBinaryQueue(inputValue, iterationValue));
     reverse("stack",this, () => reverseToBinaryStack(inputValue, iterationValue));
-    reverse("queue",this, () => reverseToBinaryQueue(inputValue, iterationValue));
     reverse("array",this, () => reverseToBinaryArr(inputValue, iterationValue));
     reverse("linked-list",this, () => reverseToBinaryLinkedList(inputValue, iterationValue));
 
     generateConvertIntegerSteps(inputValue);
     generateConvertRemainderSteps(inputValue, iterationValue);
+
+    setConversionHistory(inputValue, result, iterationValue);
+
+    getConversionHistory();
+
     showToast();
   }
 });
+
+getConversionHistory();
