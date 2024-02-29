@@ -2,10 +2,13 @@ import { reverseToBinaryStack } from "./stack.js";
 import { reverseToBinaryQueue } from "./queue.js";
 import { reverseToBinaryLinkedList } from "./linkedList.js";
 import { reverseToBinaryArr } from "./array.js";
+import {exportCSVFile} from "./csv.js";
 
 const $ = document.querySelector.bind(document);
 const resetBtn = $("#reset-btn");
 const convertBtn = $("#convert-btn");
+const exportBtnJson = $("#export-json-btn");
+const exportBtnExcel = $("#export-excel-btn");
 const iteration = $("#iteration");
 const input = $("#input");
 
@@ -194,6 +197,43 @@ convertBtn.addEventListener("click", (e) => {
 
     showToast();
   }
+});
+
+exportBtnJson.addEventListener("click", (e) => {
+  let history = JSON.parse(localStorage.getItem("history")) || [];
+  let data = JSON.stringify(history, null, 2);
+  let blob = new Blob([data], { type: "application/json" });
+  let url = URL.createObjectURL(blob);
+
+  let a = document.createElement("a");
+  a.href = url;
+  a.download = "conversion-history.json";
+  a.click();
+});
+
+exportBtnExcel.addEventListener("click", (e) => {
+  var headers = {
+    decimal: 'Decimal',
+    binary: "Binary",
+    iteration: "Iteration",
+  };
+
+  var itemsNotFormatted = JSON.parse(localStorage.getItem("history")) || [];;
+
+  var itemsFormatted = [];
+
+  // format the data
+  itemsNotFormatted.forEach((item) => {
+      itemsFormatted.push({
+        decimal: item.decimal,
+        binary: item.binary,
+        iteration: item.iteration,
+      });
+  });
+
+  var fileTitle = 'conversion-history';
+
+  exportCSVFile(headers, itemsFormatted, fileTitle);
 });
 
 getConversionHistory();
