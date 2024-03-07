@@ -1,32 +1,32 @@
-function integerPart(input) {
+function DoiPN(input) {
   return (Math.trunc(input) >>> 0).toString(2);
 }
 
-function decimalPart(input, numberOfBits) {
-  let array = [];
-  let decimalPart = input - Math.trunc(input);
+function DoiPD(input, numberOfBits) {
+  let Mang = [];
+  let PD = input - Math.trunc(input);
 
-  if(decimalPart === 0) return "0";
+  if(PD === 0) return "0";
   
   let count = 0;
 
-  while (decimalPart > 0 && count < numberOfBits) {
-    decimalPart *= 2;
-    let bit = Math.trunc(decimalPart);
-    array.push(bit);
-    decimalPart -= bit;
+  while (PD > 0 && count < numberOfBits) {
+    PD *= 2;
+    let bit = Math.trunc(PD);
+    Mang.push(bit);
+    PD -= bit;
     count++;
   }
 
-  return array.join("");
+  return Mang.join("");
 }
 
 export function reverseToBinaryArr(input, numberOfBits) {
-  let inputValue = Number(input);
-  let numberOfBitsValue = Number(numberOfBits);
+  let NhapSo = Number(input);
+  let NhapSoBit = Number(numberOfBits);
 
-  let integer = integerPart(inputValue);
-  let decimal = decimalPart(inputValue, numberOfBitsValue);
+  let HienPN = DoiPN(NhapSo);
+  let HienPD = DoiPD(NhapSo, NhapSoBit);
 
-  return `${integer}.${decimal}`;
+  return `${HienPN}.${HienPD}`;
 } 

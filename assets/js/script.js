@@ -165,6 +165,8 @@ resetBtn.addEventListener("click", (e) => {
   $("#input").value = "";
   $("#iteration").value = "";
   $("#result").style.display = "none";
+  $("#input").style.backgroundColor = "#fff";
+  $("#iteration").style.backgroundColor = "#fff";
 });
 
 convertBtn.addEventListener("click", (e) => {
